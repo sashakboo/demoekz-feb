@@ -1,0 +1,29 @@
+# ER-диаграмма для портала клининговых услуг
+
+## Сущности:
+
+### 1. Users (Пользователи)
+- id (SERIAL, PRIMARY KEY)
+- login (VARCHAR(50), UNIQUE, NOT NULL)
+- password (VARCHAR(255), NOT NULL)
+- fullname (VARCHAR(100), NOT NULL)
+- phone (VARCHAR(20), NOT NULL)
+- email (VARCHAR(100), NOT NULL)
+- created_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+### 2. Orders (Заявки)
+- id (SERIAL, PRIMARY KEY)
+- user_id (INTEGER, FOREIGN KEY -> Users.id)
+- address (TEXT, NOT NULL)
+- contact_info (TEXT, NOT NULL)
+- service_type (VARCHAR(100), NOT NULL)
+- custom_service (TEXT)
+- service_date (DATE, NOT NULL)
+- service_time (TIME, NOT NULL)
+- payment_method (VARCHAR(20), NOT NULL)
+- status (VARCHAR(20), DEFAULT 'новая')
+- admin_comment (TEXT)
+- created_at (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP)
+
+## Связи:
+- Users (1) <---> (M) Orders (один пользователь может сделать много заявок)
