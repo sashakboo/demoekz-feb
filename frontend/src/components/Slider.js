@@ -36,24 +36,90 @@ const Slider = ({ images }) => {
   };
 
   return (
-    <Box className="slider-container">
-      <Box className="slider-image" component="img" src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
-      
-      <Box className="slider-controls">
-        <IconButton className="prev-btn" onClick={goToPrevious}>
+    <Box 
+      className="slider-container" 
+      sx={{ 
+        position: 'relative', 
+        overflow: 'hidden', 
+        width: '100%', 
+        maxWidth: '100%',
+        mx: 'auto',
+        height: { xs: '200px', sm: '300px', md: '400px' }
+      }}
+    >
+      <Box 
+        className="slider-image" 
+        component="img" 
+        src={images[currentIndex]} 
+        alt={`Slide ${currentIndex}`} 
+        sx={{ 
+          width: '100%', 
+          height: '100%', 
+          objectFit: 'cover',
+          display: 'block'
+        }}
+      />
+
+      <Box className="slider-controls" sx={{ 
+        position: 'absolute', 
+        top: '50%', 
+        width: '100%', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        transform: 'translateY(-50%)',
+        px: 2
+      }}>
+        <IconButton 
+          className="prev-btn" 
+          onClick={goToPrevious}
+          sx={{ 
+            backgroundColor: 'rgba(0,0,0,0.5)', 
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'rgba(0,0,0,0.7)',
+            }
+          }}
+        >
           <NavigateBeforeIcon style={{ fontSize: 30 }} />
         </IconButton>
-        <IconButton className="next-btn" onClick={goToNext}>
+        <IconButton 
+          className="next-btn" 
+          onClick={goToNext}
+          sx={{ 
+            backgroundColor: 'rgba(0,0,0,0.5)', 
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'rgba(0,0,0,0.7)',
+            }
+          }}
+        >
           <NavigateNextIcon style={{ fontSize: 30 }} />
         </IconButton>
       </Box>
-      
-      <Box className="dots-container">
-        {images.map((_, index) => (
+
+      <Box className="dots-container" sx={{ 
+        position: 'absolute', 
+        bottom: 10, 
+        left: 0, 
+        right: 0, 
+        display: 'flex', 
+        justifyContent: 'center',
+        gap: 1
+      }}>
+        {images.slice(0, 9).map((_, index) => (  // Limit to first 9 images for dots
           <span
             key={index}
             className={`dot ${index === currentIndex ? 'active-dot' : ''}`}
             onClick={() => goToSlide(index)}
+            style={{
+              height: '15px',
+              width: '15px',
+              margin: '0 5px',
+              backgroundColor: index === currentIndex ? '#717171' : '#bbb',
+              borderRadius: '50%',
+              display: 'inline-block',
+              cursor: 'pointer'
+            }}
           />
         ))}
       </Box>

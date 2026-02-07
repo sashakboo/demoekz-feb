@@ -1,10 +1,11 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
+import logo from '../assets/img/logo.jpg';
 
 const Navbar = () => {
-  const isLoggedIn = !!localStorage.getItem('token'); 
-  const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
+  const isLoggedIn = !!localStorage.getItem('token');
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -16,9 +17,19 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Портал клининговых услуг «Мой Не Сам»
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
+          <Avatar 
+            src={logo} 
+            alt="Logo" 
+            variant="square"
+            sx={{ width: 40, height: 40, mr: 1, objectFit: 'cover' }} 
+          />
+          <Typography variant="h6" component="div">
+            «Мой Не Сам»
+          </Typography>
+        </Box>
+        
+        <Box sx={{ flexGrow: 1 }} />
         
         <Box>
           {!isLoggedIn ? (

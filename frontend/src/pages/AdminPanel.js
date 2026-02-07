@@ -59,7 +59,6 @@ const AdminPanel = () => {
       );
     }
     
-    // Apply status filter
     if (statusFilter !== 'all') {
       result = result.filter(order => order.status === statusFilter);
     }
@@ -101,7 +100,7 @@ const AdminPanel = () => {
 
   const handleStatusUpdate = async () => {
     if (status === 'отменено' && !adminComment.trim()) {
-      return; // Validation handled in UI
+      return; 
     }
 
     try {
@@ -117,7 +116,6 @@ const AdminPanel = () => {
         }
       );
 
-      // Update the order in the local state
       setOrders(prevOrders =>
         prevOrders.map(order =>
           order.id === selectedOrder.id ? { ...order, status, admin_comment: status === 'отменено' ? adminComment : null } : order
@@ -160,7 +158,7 @@ const AdminPanel = () => {
           <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>
         )}
         
-        <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
+        {/* <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
           <OutlinedInput
             placeholder="Поиск по заявкам..."
             value={searchTerm}
@@ -186,7 +184,7 @@ const AdminPanel = () => {
               <MenuItem value="отменено">Отменено</MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
         
         {filteredOrders.length === 0 ? (
           <Typography variant="body1" align="center" sx={{ py: 4 }}>

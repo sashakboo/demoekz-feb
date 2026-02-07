@@ -13,56 +13,6 @@ code {
     monospace;
 }
 
-/* Slider styles */
-.slider-container {
-  position: relative;
-  max-width: 100%;
-  margin: auto;
-}
-
-.slider-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-}
-
-.slider-controls {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-}
-
-.prev-btn, .next-btn {
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.dots-container {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 5px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.active-dot {
-  background-color: #717171;
-}
-
 /* Responsive design for mobile devices (390x844 px) */
 @media (max-width: 600px) {
   .MuiContainer-root {
@@ -81,10 +31,6 @@ code {
   
   .MuiGrid-item {
     padding: 8px !important;
-  }
-  
-  .slider-image {
-    height: 200px !important;
   }
   
   .MuiTable-root {
