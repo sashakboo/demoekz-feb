@@ -37,10 +37,6 @@ const Register = () => {
       newErrors.fullname = 'ФИО должно содержать только кириллические символы и пробелы';
     }
     
-    // if (!/^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/.test(formData.phone)) {
-    //   newErrors.phone = 'Неверный формат телефона. Используйте +7(XXX)-XXX-XX-XX';
-    // }
-    
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Введите действительный адрес электронной почты';
     }
@@ -65,7 +61,6 @@ const Register = () => {
         setSuccess(true);
         setSubmitError('');
         
-        // Redirect after successful registration
         setTimeout(() => {
           window.location.href = '/';
         }, 2000);

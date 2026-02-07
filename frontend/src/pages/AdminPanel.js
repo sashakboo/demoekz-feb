@@ -20,16 +20,12 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem,
-  InputAdornment,
-  OutlinedInput
+  MenuItem
 } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
 
 const AdminPanel = () => {
   const [orders, setOrders] = useState([]);
-  const [filteredOrders, setFilteredOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
@@ -37,34 +33,10 @@ const AdminPanel = () => {
   const [status, setStatus] = useState('');
   const [adminComment, setAdminComment] = useState('');
   const [commentRequired, setCommentRequired] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
 
   useEffect(() => {
     fetchOrders();
   }, []);
-
-  useEffect(() => {
-    // Apply filters
-    let result = orders;
-    
-    // Apply search filter
-    if (searchTerm) {
-      const term = searchTerm.toLowerCase();
-      result = result.filter(order => 
-        order.fullname.toLowerCase().includes(term) ||
-        order.address.toLowerCase().includes(term) ||
-        (order.service_type && order.service_type.toLowerCase().includes(term)) ||
-        (order.custom_service && order.custom_service.toLowerCase().includes(term))
-      );
-    }
-    
-    if (statusFilter !== 'all') {
-      result = result.filter(order => order.status === statusFilter);
-    }
-    
-    setFilteredOrders(result);
-  }, [orders, searchTerm, statusFilter]);
 
   const fetchOrders = async () => {
     try {
@@ -156,37 +128,9 @@ const AdminPanel = () => {
         
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>
-        )}
+        )}        
         
-        {/* <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
-          <OutlinedInput
-            placeholder="Поиск по заявкам..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            }
-            sx={{ flex: 1 }}
-          />
-          <FormControl sx={{ minWidth: 150 }}>
-            <InputLabel>Фильтр по статусу</InputLabel>
-            <Select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              label="Фильтр по статусу"
-            >
-              <MenuItem value="all">Все статусы</MenuItem>
-              <MenuItem value="новая">Новая</MenuItem>
-              <MenuItem value="в работе">В работе</MenuItem>
-              <MenuItem value="выполнено">Выполнено</MenuItem>
-              <MenuItem value="отменено">Отменено</MenuItem>
-            </Select>
-          </FormControl>
-        </Box> */}
-        
-        {filteredOrders.length === 0 ? (
+        {orders.length === 0 ? (
           <Typography variant="body1" align="center" sx={{ py: 4 }}>
             Нет заявок для отображения
           </Typography>
@@ -206,7 +150,7 @@ const AdminPanel = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredOrders.map((order) => (
+                {orders.map((order) => (
                   <TableRow key={order.id}>
                     <TableCell>{order.id}</TableCell>
                     <TableCell>{order.fullname}</TableCell>

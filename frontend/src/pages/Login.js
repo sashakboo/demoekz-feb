@@ -47,7 +47,6 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         
-        // Check if user is admin
         const isAdmin = response.data.user.login === 'adminka';
         localStorage.setItem('isAdmin', isAdmin.toString());
         

@@ -105,8 +105,7 @@ const OrderForm = () => {
       
       setSubmitSuccess(true);
       setSubmitError('');
-      
-      // Reset form after successful submission
+
       setFormData({
         address: '',
         contactInfo: '',
